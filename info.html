@@ -49,7 +49,7 @@
 
     let cnv;
     function setup() {
-       cnv = createCanvas(innerWidth, innerHeight);
+       cnv = createCanvas(window.innerWidth, window.innerHeight);
        cnv.parent('p5sketch');
     }
 
@@ -58,7 +58,7 @@
     }
 
     function windowResized(){
-        resizeCanvas(innerWidth, innerHeight);
+        resizeCanvas(window.innerWidth, window.innerHeight);
     }
 
     const info = {
@@ -121,7 +121,9 @@
         info.browserOnline(),
         info.browserPlatform(),
         info.dataCookies2(),
-        info.dataStorage()
+        info.dataStorage(),
+        info.latitude(),
+        info.longitude()
       )
 
       </script>
