@@ -38,7 +38,7 @@
     <div id="p5sketch"></div>
 
     <div style="margin-top: 10px">
-        <h1>Rotation Graph 1</h1>
+        <h1>Rotation Graph 2</h1>
         <p>rotationX: <span id="x-rot"></span></p>
         <p>rotationY: <span id="y-rot"></span></p>
         <p>rotationZ: <span id="z-rot"></span></p>
@@ -53,11 +53,12 @@
             cnv.parent('p5sketch');
             //createCanvas(innerWidth, innerHeight, WEBGL);
             //pixelDensity(1);
+            background(220);
         }
         
         function draw() {
-            //background(250);
-            background(200,100,100);
+            //background(220);
+            
             
             document.getElementById('x-rot').innerText = round(rotationX);  // -180-180
             document.getElementById('y-rot').innerText = round(rotationY);  // -90-90
@@ -80,21 +81,22 @@
             //GRAPH
             positions.push(createVector(rotationX, rotationY, rotationZ));
             
+            /*
             // LEGENDE UNTEN
             strokeWeight(0);
             fill(0);
             text('Mode: Rotation, red = x-axis, green = y-axis, blue = z-axis', 10, displayHeight / 2);
-
+            */
+            
             noFill();
             strokeWeight(1);
 
-
             push();
-            //translate(0, innerHeight / 4);
+            translate(0, innerHeight / 4);
             stroke(255, 0, 0);
             beginShape();
             for (let i = 0; i < positions.length; i++) {
-              vertex(i, map(positions[i].x, -180, 180, 0, displayHeight));
+              vertex(i, map(positions[i].x, -180, 180, innerHeight / -6, innerHeight / 6 - 50));
             }
             endShape();
             pop();
