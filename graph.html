@@ -1,1 +1,71 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Rotation Graph</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="stiles.css" />
+    <script src="js/Libraries/p5.min.js"></script>
+    <script src="js/Libraries/p5.dom.min.js"></script>
+    <!-- <script src="js/sketch.js"></script> -->
+
+    <style>
+        #p5sketch {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            z-index: -1;
+        }
+        p {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 1em;
+        }
+        h1 {
+            font-family: Helvetica, Arial, sans-serif;
+            margin-top: 10px;
+        }
+        h2 {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 1em;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="p5sketch"></div>
+
+    <div style="margin-top: 10px">
+        <h1>Rotation Graph</h1>
+        <p>rotationX: <span id="x-rot"></span></p>
+        <p>rotationY: <span id="y-rot"></span></p>
+        <p>rotationZ: <span id="z-rot"></span></p>
+    </div>
+
+    <script>
+        let cnv;
+        function setup() {
+            cnv = createCanvas(innerWidth, innerHeight, WEBGL);
+            cnv.parent('p5sketch');
+            //createCanvas(displayWidth, displayHeight, WEBGL);
+        }
+        function draw() {
+            background(250);
+            document.getElementById('x-rot').innerText = round(rotationX);
+            document.getElementById('y-rot').innerText = round(rotationY);
+            document.getElementById('z-rot').innerText = round(rotationZ);
+            normalMaterial();
+            translate(0, map(rotationX, 0, 180, 0, displayHeight), 0);
+            translate(map(rotationY, 0, 180, 0, displayWidth), 0, 0);
+            //rotateX(accelerationX * 0.01); //original line
+            rotateX(rotationX * 0.05);
+            rotateY(rotationY * 0.05);
+            box(100, 100, 100);
+        }
+    </script>
+
+</body>
+
+</html>
