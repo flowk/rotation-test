@@ -38,7 +38,7 @@
     <div id="p5sketch"></div>
 
     <div style="margin-top: 10px">
-        <h1>Rotation Graph</h1>
+        <h1>Rotation Graph 5</h1>
         <p>rotationX: <span id="x-rot"></span></p>
         <p>rotationY: <span id="y-rot"></span></p>
         <p>rotationZ: <span id="z-rot"></span></p>
@@ -91,11 +91,11 @@
             strokeWeight(1);
 
             push();
-            translate(0, innerHeight / 2);
+            translate(0, displayHeight / 4);
             stroke(255, 0, 0);
             beginShape();
             for (let i = 0; i < positions.length; i++) {
-              vertex(i, map(positions[i].x, -180, 180, 0,100));
+              vertex(i, map(positions[i].x, -180, 180, displayHeight / -6 + 20, displayHeight / 6 - 20));
             }
             endShape();
             pop();
