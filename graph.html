@@ -49,6 +49,7 @@
     <script>
         let cnv;
         let positions = [];
+        let rx;
 
         function setup() {
             //cnv = createCanvas(displayWidth, displayHeight, WEBGL); // Grösse des Screens, der Bildschirmauflösung
@@ -71,7 +72,7 @@
 
 
             //GRAPH
-            positions.push(createVector(rotationX, rotationY, rotationZ));
+            positions.push(createVector(rx, rotationY, rotationZ));
 
 
             // LEGENDE UNTEN
@@ -115,6 +116,13 @@
             if (positions.length > width) positions.splice(0, 1);
 
         }
+
+        window.ondevicemotion = event => {
+            /* RAW VALUES */
+            rx = event.rotation.x;
+            ry = event.rotation.y;
+            rz = event.rotation.z;
+        };
 
         function windowResized() {
             resizeCanvas(window.innerWidth, window.innerHeight);
