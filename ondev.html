@@ -54,7 +54,7 @@
     <div id="p5sketch"></div>
 
     <div style="margin-top: 10px">
-        <h1>Rotation Graph OndevMotion</h1>
+        <h1>devicemotion</h1>
         <p class="x-rot">X-Rotation: <span id="x-rot"></span></p>
         <p class="y-rot">Y-Rotation: <span id="y-rot"></span></p>
         <p class="z-rot">Z-Rotation: <span id="z-rot"></span></p>
@@ -133,9 +133,9 @@
         function handleMotionEvent(event) {
 
             /* RAW VALUES */
-            let rx = event.rotationRate.alpha;
-            let ry = event.rotationRate.beta;
-            let rz = event.rotationRate.gamma;
+            let rx = event.rotation.alpha;
+            let ry = event.rotation.beta;
+            let rz = event.rotation.gamma;
 
             /* SMOOTHED VALUES */
             sx = smoothVal(rx, sx);
