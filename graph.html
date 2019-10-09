@@ -70,8 +70,18 @@
             document.getElementById('z-rot').innerText = round(rotationZ);  // 0-360
 
 
-            //GRAPH
-            positions.push(createVector(rx, rotationY, rz));
+            /* RAW VALUES */
+            rx = rotationX;
+            ry = rotationY;
+            rz = rotationZ;
+
+            /* SMOOTHED VALUES */
+            sx = smoothVal(rx, sx);
+            sy = smoothVal(ry, sy);
+            sz = smoothVal(rz, sz);
+
+
+            positions.push(createVector(rx, ry, rz));
 
 
             // LEGENDE UNTEN
@@ -116,17 +126,7 @@
 
         }
 
-        window.ondevicemotion = event => {
-            /* RAW VALUES */
-            rx = event.rotationX;
-            ry = event.rotation.y;
-            rz = event.rotation.z;
 
-            /* SMOOTHED VALUES */
-            sx = smoothVal(rx, sx);
-            sy = smoothVal(ry, sy);
-            sz = smoothVal(rz, sz);
-        };
 
         /* VALUE SMOOTHING */
         function smoothVal(inputVal, outputVal) {
