@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Rotation Graph</title>
+    <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stiles.css" />
+    <script src="js/Libraries/p5.min.js"></script>
+    <script src="js/Libraries/p5.dom.min.js"></script>
+    <!-- <script src="js/sketch.js"></script> -->
+
+    <style>
+        #p5sketch {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            z-index: -1;
+        }
+
+        .x-rot {
+            color:red;
+        }
+
+        .y-rot {
+            color: green;
+        }
+
+        .z-rot {
+            color: blue;
+        }
+
+        p {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 1em;
+        }
+
+        h1 {
+            font-family: Helvetica, Arial, sans-serif;
+            margin-top: 10px;
+        }
+
+        h2 {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 1em;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="p5sketch"></div>
+
+    <div style="margin-top: 10px">
+        <h1>Rotation Graph</h1>
+        <p class="x-rot">X-Rotation: <span id="x-rot"></span></p>
+        <p class="y-rot">Y-Rotation: <span id="y-rot"></span></p>
+        <p class="z-rot">Z-Rotation: <span id="z-rot"></span></p>
+    </div>
+
+    <script>
+        let cnv;
+        let positions = [];
+        let rx, ry, rz, sx, sy, sz;
+        rx = ry = rz = sx = sy = sz = 0;
+        let easing = 0.5; // set between 0 - 1
+
+        function setup() {
+            //cnv = createCanvas(displayWidth, displayHeight, WEBGL); // Grösse des Screens, der Bildschirmauflösung
+            cnv = createCanvas(window.innerWidth, window.innerHeight);
+            //cnv = createCanvas(window.innerWidth, window.innerHeight, WEBGL);   //Für 3D , Z-Wert muss überall eingefügt werden. Startet von Mitte aus.
+
+            cnv.parent('p5sketch');
+            //pixelDensity(1);
+            frameRate(30);
+        }
+
+        function draw() {
+            background(220);
+
+            document.getElementById('x-rot').innerText = round(sx);  // -180-180
+            document.getElementById('y-rot').innerText = round(sy);  // -90-90
+            document.getElementById('z-rot').innerText = round(sz);  // 0-360
+
+
+            positions.push(createVector(sx, sy, sz));
+
+
+            // LEGENDE UNTEN
+            /*strokeWeight(0);
+            fill(0);
+            text('red = x-axis, green = y-axis, blue = z-axis', 10, window.innerHeight -15);
+            */
+
+            //GRAPHS
+            noFill();
+            strokeWeight(1);
+            push();
+            translate(0, window.innerHeight / 2);
+            stroke(255, 0, 0);
+            beginShape();
+            for (let i = 0; i < positions.length; i++) {
+              vertex(i, map(positions[i].x, -180, 180, -30, 30));
+            }
+            endShape();
+            pop();
+
+            push();
+            translate(0, window.innerHeight / 2 + 50);
+            stroke(0, 255, 0);
+            beginShape();
+            for (let i = 0; i < positions.length; i++) {
+              vertex(i, map(positions[i].y, -90, 90, -30, 30));
+            }
+            endShape();
+            pop();
+
+            push();
+            translate(0, window.innerHeight / 2 + 130);
+            stroke(0, 0, 255);
+            beginShape();
+            for (let i = 0; i < positions.length; i++) {
+              vertex(i, map(positions[i].z, 0, 360, -30, 30));
+            }
+            endShape();
+            pop();
+
+            if (positions.length > width) positions.splice(0, 1);
+        }
+
+        function handleMotionEvent(event) {
+
+            /* RAW VALUES */
+            let rx = event.rotationRate.alpha;
+            let ry = event.rotationRate.beta;
+            let rz = event.rotationRate.gamma;
+
+            /* SMOOTHED VALUES */
+            sx = smoothVal(rx, sx);
+            sy = smoothVal(ry, sy);
+            sz = smoothVal(rz, sz);
+        }
+
+        window.addEventListener("devicemotion", handleMotionEvent, true);
+
+        /* VALUE SMOOTHING */
+        function smoothVal(inputVal, outputVal) {
+            let tarVal = inputVal;
+            let calcVal = tarVal - outputVal;
+            outputVal += calcVal * easing;
+            return outputVal;
+        }
+
+        function windowResized() {
+            resizeCanvas(window.innerWidth, window.innerHeight);
+            //resizeCanvas(displayWidth, displayHeight);
+        }
+
+    </script>
+
+</body>
+
+</html>
