@@ -25,7 +25,7 @@
         }
 
         .y-rot {
-            color: green;
+            color: #00ff00;
         }
 
         .z-rot {
@@ -133,9 +133,9 @@
         function handleMotionEvent(event) {
 
             /* RAW VALUES */
-            let rx = event.alpha;
-            let ry = event.beta;
-            let rz = event.gamma;
+            let rx = event.beta;
+            let ry = event.gamma;
+            let rz = event.alpha;
 
             /* SMOOTHED VALUES */
             sx = smoothVal(rx, sx);
