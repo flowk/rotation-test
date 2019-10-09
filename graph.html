@@ -19,14 +19,29 @@
             left: 0px;
             z-index: -1;
         }
+
+        .x-rot {
+            color:red;
+        }
+
+        .y-rot {
+            color: green;
+        }
+
+        .z-rot {
+            color: blue;
+        }
+
         p {
             font-family: Helvetica, Arial, sans-serif;
             font-size: 1em;
         }
+
         h1 {
             font-family: Helvetica, Arial, sans-serif;
             margin-top: 10px;
         }
+
         h2 {
             font-family: Helvetica, Arial, sans-serif;
             font-size: 1em;
@@ -40,9 +55,9 @@
 
     <div style="margin-top: 10px">
         <h1>Rotation Graph</h1>
-        <p>rotationX: <span id="x-rot"></span></p>
-        <p>rotationY: <span id="y-rot"></span></p>
-        <p>rotationZ: <span id="z-rot"></span></p>
+        <p class="x-rot">X-Rotation: <span id="x-rot"></span></p>
+        <p class="y-rot">Y-Rotation: <span id="y-rot"></span></p>
+        <p class="z-rot">Z-Rotation: <span id="z-rot"></span></p>
     </div>
 
     <script>
@@ -85,9 +100,10 @@
 
 
             // LEGENDE UNTEN
-            strokeWeight(0);
+            /*strokeWeight(0);
             fill(0);
             text('red = x-axis, green = y-axis, blue = z-axis', 10, window.innerHeight -15);
+            */
 
             //GRAPHS
             noFill();
@@ -124,8 +140,6 @@
 
             if (positions.length > width) positions.splice(0, 1);
         }
-
-
 
         /* VALUE SMOOTHING */
         function smoothVal(inputVal, outputVal) {
